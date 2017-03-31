@@ -8,6 +8,9 @@ header {
   padding-top: 8px;
   background-color: #7cb8ff;
 }
+article, aside, footer, header, nav, section {/*ie forgets */
+  display: block;
+}
 
 nav ul {
   padding-bottom: 16px;
@@ -73,7 +76,9 @@ li {
   font-size: 16px;
   font-size: 1em;
 }
-
+.highlight {
+  background-color: aliceblue;
+}
 
 #add_contact_form, #search_form  {
   font-size: 19px;
@@ -90,7 +95,7 @@ li {
 #add_contact_form label input , #search_form label input {
   font-size: 19px;
   font-size: 1.2em;
-  background-color: #ffffff;
+  background-color: #f2fffd;
   border: none;
   padding: 4px 16px;
   padding: 0.3rem 1rem ;

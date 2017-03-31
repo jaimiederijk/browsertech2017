@@ -53,9 +53,9 @@
         $sql = "INSERT INTO persons (name, phone_number, email) VALUES ('".$name."', '".$pNumber."', '".$email."')";
         if (!$search) {
           if ($conn->query($sql) === TRUE) {
-              echo "New Contact created successfully";
+              // echo "New Contact created successfully";
               $_POST = array();
-              header("Location: index.php"); // redirect back to your contact form
+              header("Location: index.php");
               exit;
           } else {
               echo "Error: " . $sql . "<br>" . $conn->error;
@@ -178,7 +178,7 @@
                 <span class="error">* <?php echo $emailErr;?></span>
           </label><br>
           <label>
-            <input type="submit" name="newcontact">
+            <input type="submit" value="submit" name="newcontact">
           </label>
         </form>
 

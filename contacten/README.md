@@ -15,20 +15,27 @@ De basis functionaliteit is uitgewerkt in html en php. En van daar uit verbeterd
 ### html
 
 - form input type = tel wanneer dit niet wordt ondersteunt word het type text. hetzelfde geldt voor andere input types. En type text werkt ook.
-- inline script dat html5 tags opvangt.
+- inline script dat html5 tags opvangt. dus een Combi van oude IE browsers en geen werkende JavaScript sloopt de website.
+```
+<script>
+  'article aside footer header nav section time'.replace(/\w+/g,function(n){document.createElement(n)});
+</script>
+```
 
 ### php
 
-- zoeken in lijst
-- contacten toevoegen
-- lijst contacten genereren
+
+- Zoeken in lijst
+- Contacten toevoegen
+- Lijst contacten genereren
 
 ### css
+- css om voor IE gemaakte elementen ```display:block``` mee te geven
 - eerst size in px en daarna enhance met EM's
 - tabindex op div om details zichtbaar te maken met alleen css.
 ``` div:focus a {make vissible} ```
 - fontsize 0 ipv ```display=none``` zodat tabbaar blijft
-- tabbaarheid zorgt er ook voor dat zichtbaar blijft
+- Tabbaarheid zorgt er ook voor dat zichtbaar blijft
 - inline-block oplossingen voor ie7 en firefox2
 ```
 display: -moz-inline-stack;
@@ -38,6 +45,21 @@ zoom: 1;
 ```
 
 ### JavaScript
-- classname ipv classlist  
-- getelementbytag ipv queryselector
-- onclick ipv eventlistener
+- classname ipv classlist gebruiken
+- getelementbytag ipv queryselector gebruiken
+```
+  var htmlElements = {
+    contacts: document.getElementsByTagName('div')
+  }
+```
+- onclick ipv eventlistener gebruiken.
+```
+  htmlElements.contacts[i].onclick = function() {
+    if (htmlElements.contacts[i].className == "show") {
+      htmlElements.contacts[i].className = htmlElements.contacts[i].className.replace(/\bshow/g, "");
+    } else {
+      htmlElements.contacts[i].className = "show";
+    }
+
+  }
+```
