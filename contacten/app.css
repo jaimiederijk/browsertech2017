@@ -6,10 +6,12 @@ body {
 }
 header {
   padding-top: 8px;
+  background-color: #7cb8ff;
 }
+
 nav ul {
-  margin-bottom: 16px;
-  margin-bottom: 1rem;
+  padding-bottom: 16px;
+  padding-bottom: 1rem;
 }
 h1,h2,h3,h4,p,a,li {
   margin-left: 16px;
@@ -92,4 +94,18 @@ li {
   border: none;
   padding: 4px 16px;
   padding: 0.3rem 1rem ;
+}
+#search_form {
+  margin-bottom: 0;
+  position: fixed;
+  background-color: transparent;
+  top: 0;
+  right: 0;
+  z-index: 99;
+}
+#search_form label {
+  display: -moz-inline-stack;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
 }

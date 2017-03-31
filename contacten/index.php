@@ -101,8 +101,8 @@
         </ul>
         <form id="search_form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
         <label>
-          <input placeholder='jan' type="text" name="search">:Search Name
-              <span class="error">* <?php echo $searchErr;?></span>
+          <input placeholder='jan' type="text" name="search">
+              <span class="error"><?php echo $searchErr;?></span>
         </label>
         <label>
           <input type="submit" value="Search" name="searchcontact">
