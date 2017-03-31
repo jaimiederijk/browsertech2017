@@ -125,6 +125,7 @@
 
             while($row = $result->fetch_assoc()) {
               $firstLetter =  mb_substr($row["name"],0,1);
+              if (stripos($row["name"], $search) !== false || $search =="") {// check if search exists
 
                 if (stripos($personsList, "<h3>".$firstLetter."</h3>") !== false) {
 
