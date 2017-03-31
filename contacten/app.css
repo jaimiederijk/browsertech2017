@@ -102,15 +102,20 @@ li {
 }
 #search_form {
   margin-bottom: 0;
-  position: fixed;
   background-color: transparent;
-  top: 0;
-  right: 0;
-  z-index: 99;
 }
 #search_form label {
   display: -moz-inline-stack;
   display: inline-block;
   zoom: 1;
   *display: inline;
+}
+
+@media (min-width: 650px) {
+  #search_form {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 99;
+  }
 }
