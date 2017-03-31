@@ -73,19 +73,19 @@ li {
 }
 
 
-#add_contact_form {
+#add_contact_form, #search_form  {
   font-size: 19px;
   font-size: 1.3em;
   background-color: #7cb8ff;
   padding: 16px;
   padding: 1rem;
 }
-#add_contact_form label {
+#add_contact_form label, #search_form label {
   display: block;
   margin-bottom: 3px;
   margin-bottom: 0.2rem;
 }
-#add_contact_form label input {
+#add_contact_form label input , #search_form label input {
   font-size: 19px;
   font-size: 1.2em;
   background-color: #ffffff;

@@ -8,12 +8,15 @@
       die("Connection failed: " . $conn->connect_error);
   }
 
-  $nameErr = $numberErr = $emailErr = "";
-  $name = $pNumber = $email = "";
+  $nameErr = $numberErr = $emailErr = $searchErr = "";
+  $name = $pNumber = $email = $search = "";
   $errorBoal = false;
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (!empty($_POST["newcontact"])) {
+    if (!empty($_POST["search"])) {
+      $search =  $_POST["search"];
+    }
+    else if (!empty($_POST["newcontact"])) {
 
       if (empty($_POST["name"])) {
           $nameErr = "Name is required";
@@ -48,15 +51,17 @@
       }
       if (!$errorBoal) {
         $sql = "INSERT INTO persons (name, phone_number, email) VALUES ('".$name."', '".$pNumber."', '".$email."')";
-
-        if ($conn->query($sql) === TRUE) {
-            echo "New Contact created successfully";
-            $_POST = array();
-            header("Location: index.php"); // redirect back to your contact form
-            exit;
-        } else {
-            echo "Error: " . $sql . "<br>" . $conn->error;
+        if (!$search) {
+          if ($conn->query($sql) === TRUE) {
+              echo "New Contact created successfully";
+              $_POST = array();
+              header("Location: index.php"); // redirect back to your contact form
+              exit;
+          } else {
+              echo "Error: " . $sql . "<br>" . $conn->error;
+          }
         }
+
 
       }
 
@@ -94,6 +99,15 @@
             <a href="#create_contact">Create contact</a>
           </li>
         </ul>
+        <form id="search_form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+        <label>
+          <input placeholder='jan' type="text" name="search">:Search Name
+              <span class="error">* <?php echo $searchErr;?></span>
+        </label>
+        <label>
+          <input type="submit" value="Search" name="searchcontact">
+        </label>
+        </form>
       </nav>
 
     </header>
@@ -112,30 +126,31 @@
             while($row = $result->fetch_assoc()) {
               $firstLetter =  mb_substr($row["name"],0,1);
 
-              if (stripos($personsList, "<h3>".$firstLetter."</h3>") !== false) {// check if catagorie exists
-                $personsList = $personsList. "<div tabindex='0'><p >".$row["name"]."</p>
-                  <ul>
-                    <li>
-                      <a href='tel:+".$row["phone_number"]."'>".$row["phone_number"]."</a>
-                    </li>
-                    <li>
-                      <a href='mailto:".$row["email"]."'>".$row["email"]."</a>
-                    </li>
-                  </ul></div>";
-              } else {
-                $personsList = $personsList.
-                  "</section><section class='letter_category'><h3>".$firstLetter."</h3>
-                  <div tabindex='0'><p>".$row["name"]."</p>
-                  <ul>
-                    <li>
-                      <a  href='tel:+".$row["phone_number"]."'>".$row["phone_number"]."</a>
-                    </li>
-                    <li>
-                      <a href='mailto:".$row["email"]."'>".$row["email"]."</a>
-                    </li>
-                  </ul></div>";
-              }
+                if (stripos($personsList, "<h3>".$firstLetter."</h3>") !== false) {
 
+                  $personsList = $personsList. "<div tabindex='0'><p >".$row["name"]."</p>
+                    <ul>
+                      <li>
+                        <a href='tel:+".$row["phone_number"]."'>".$row["phone_number"]."</a>
+                      </li>
+                      <li>
+                        <a href='mailto:".$row["email"]."'>".$row["email"]."</a>
+                      </li>
+                    </ul></div>";
+                } else {
+                  $personsList = $personsList.
+                    "</section><section class='letter_category'><h3>".$firstLetter."</h3>
+                    <div tabindex='0'><p>".$row["name"]."</p>
+                    <ul>
+                      <li>
+                        <a  href='tel:+".$row["phone_number"]."'>".$row["phone_number"]."</a>
+                      </li>
+                      <li>
+                        <a href='mailto:".$row["email"]."'>".$row["email"]."</a>
+                      </li>
+                    </ul></div>";
+                }
+              }
             }
 
             echo $personsList;
